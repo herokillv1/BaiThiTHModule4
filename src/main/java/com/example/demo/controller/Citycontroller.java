@@ -39,7 +39,7 @@ public class Citycontroller {
         } else {
             cities = cityService.fillAll(pageable);
         }
-        ModelAndView modelAndView = new ModelAndView("/city/list");
+        ModelAndView modelAndView = new ModelAndView("city/list");
         modelAndView.addObject("search", search.orElse(""));
         modelAndView.addObject("cities", cities);
         return modelAndView;
@@ -47,7 +47,7 @@ public class Citycontroller {
 
     @GetMapping("/create-city")
     public ModelAndView showCreateForm(){
-        ModelAndView modelAndView = new ModelAndView("/city/create");
+        ModelAndView modelAndView = new ModelAndView("city/create");
         modelAndView.addObject("city", new City());
         return modelAndView;
     }
@@ -55,7 +55,7 @@ public class Citycontroller {
     @PostMapping("/create-city")
     public ModelAndView saveCustomer(@ModelAttribute("customer") City city){
         cityService.save(city);
-        ModelAndView modelAndView = new ModelAndView("/city/create");
+        ModelAndView modelAndView = new ModelAndView("city/create");
         modelAndView.addObject("city", new City());
         modelAndView.addObject("message", "New city created successfully");
         return modelAndView;
@@ -65,12 +65,12 @@ public class Citycontroller {
     public ModelAndView showEditForm(@PathVariable Long id){
         City city = cityService.findById(id);
         if(city != null) {
-            ModelAndView modelAndView = new ModelAndView("/city/edit");
+            ModelAndView modelAndView = new ModelAndView("city/edit");
             modelAndView.addObject("city", city);
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
+            ModelAndView modelAndView = new ModelAndView("error.404");
             return modelAndView;
         }
     }
@@ -78,7 +78,7 @@ public class Citycontroller {
     @PostMapping("/edit-city")
     public ModelAndView updateCustomer(@ModelAttribute("city") City city){
         cityService.save(city);
-        ModelAndView modelAndView = new ModelAndView("/city/edit");
+        ModelAndView modelAndView = new ModelAndView("city/edit");
         modelAndView.addObject("city", city);
         modelAndView.addObject("message", "City updated successfully");
         return modelAndView;
@@ -88,12 +88,12 @@ public class Citycontroller {
     public ModelAndView showDeleteForm(@PathVariable Long id){
         City city = cityService.findById(id);
         if(city != null) {
-            ModelAndView modelAndView = new ModelAndView("/city/delete");
+            ModelAndView modelAndView = new ModelAndView("city/delete");
             modelAndView.addObject("city", city);
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
+            ModelAndView modelAndView = new ModelAndView("error.404");
             return modelAndView;
         }
     }

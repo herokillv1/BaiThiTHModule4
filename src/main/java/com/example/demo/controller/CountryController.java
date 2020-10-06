@@ -25,14 +25,14 @@ public class CountryController {
     @GetMapping("/countries")
     public ModelAndView listProvinces(){
         Iterable<Country> countries = countryService.findAll();
-        ModelAndView modelAndView = new ModelAndView("/country/list");
+        ModelAndView modelAndView = new ModelAndView("country/list");
         modelAndView.addObject("countries", countries);
         return modelAndView;
     }
 
     @GetMapping("/create-country")
     public ModelAndView showCreateForm(){
-        ModelAndView modelAndView = new ModelAndView("/country/create");
+        ModelAndView modelAndView = new ModelAndView("country/create");
         modelAndView.addObject("country", new Country());
         return modelAndView;
     }
@@ -40,7 +40,7 @@ public class CountryController {
     @PostMapping("/create-country")
     public ModelAndView saveProvince(@ModelAttribute("country") Country country){
         countryService.save(country);
-        ModelAndView modelAndView = new ModelAndView("/country/create");
+        ModelAndView modelAndView = new ModelAndView("country/create");
         modelAndView.addObject("country", new Country());
         modelAndView.addObject("message", "New country created successfully");
         return modelAndView;
@@ -50,12 +50,12 @@ public class CountryController {
     public ModelAndView showEditForm(@PathVariable Long id){
         Country country = countryService.findById(id);
         if(country != null) {
-            ModelAndView modelAndView = new ModelAndView("/country/edit");
+            ModelAndView modelAndView = new ModelAndView("country/edit");
             modelAndView.addObject("country", country);
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
+            ModelAndView modelAndView = new ModelAndView("error.404");
             return modelAndView;
         }
     }
@@ -63,7 +63,7 @@ public class CountryController {
     @PostMapping("/edit-country")
     public ModelAndView updateProvince(@ModelAttribute("country") Country country){
         countryService.save(country);
-        ModelAndView modelAndView = new ModelAndView("/country/edit");
+        ModelAndView modelAndView = new ModelAndView("country/edit");
         modelAndView.addObject("country", country);
         modelAndView.addObject("message", "Country updated successfully");
         return modelAndView;
@@ -73,12 +73,12 @@ public class CountryController {
     public ModelAndView showDeleteForm(@PathVariable Long id){
         Country country = countryService.findById(id);
         if(country != null) {
-            ModelAndView modelAndView = new ModelAndView("/country/delete");
+            ModelAndView modelAndView = new ModelAndView("country/delete");
             modelAndView.addObject("country", country);
             return modelAndView;
 
         }else {
-            ModelAndView modelAndView = new ModelAndView("/error.404");
+            ModelAndView modelAndView = new ModelAndView("error.404");
             return modelAndView;
         }
     }
@@ -93,12 +93,12 @@ public class CountryController {
     public ModelAndView viewProvince(@PathVariable("id") Long id){
         Country country = countryService.findById(id);
         if(country == null){
-            return new ModelAndView("/error.404");
+            return new ModelAndView("error.404");
         }
 
         Iterable<City> cities = cityService.findAllByCountry(country);
 
-        ModelAndView modelAndView = new ModelAndView("/country/view");
+        ModelAndView modelAndView = new ModelAndView("country/view");
         modelAndView.addObject("country", country);
         modelAndView.addObject("cities", cities);
         return modelAndView;
