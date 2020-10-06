@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View country</title>
+</head>
+<body>
+    <h1>View country: <span th:text="${country.name}"></span></h1>
+    <a href="/countries">Country list</a>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Area</th>
+            <td>Population</td>
+            <td>GDP</td>
+            <td>Introduce</td>
+
+        </tr>
+        <th:block th:each="city : ${cities}">
+            <tr>
+                <td th:text="${city.name}"></td>
+                <td th:text="${city.area}"></td>
+                <td th:text="${city.population}"></td>
+                <td th:text="${city.gdp}"></td>
+                <td th:text="${city.introduce}"></td>
+            </tr>
+        </th:block>
+    </table>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/create-city">Create new city</a>
+<h1>City</h1>
+<form th:action="@{/cities}">
+    Search by city name:
+    <label>
+        <input name="search" type="text" th:value="${search}"/>
+    </label>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Area</th>
+        <td>Population</td>
+        <td>GDP</td>
+        <td>Country</td>
+        <td>Introduce</td>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="city : ${cities}">
+        <tr>
+            <td th:text="${city.name}"></td>
+            <td th:text="${city.area}"></td>
+            <td th:text="${city.population}"></td>
+            <td th:text="${city.gdp}"></td>
+            <td th:text="${city.country.name}"></td>
+            <td th:text="${city.introduce}"></td>
+            <td><a th:href="@{/edit-city/__${city.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-city/__${city.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+<div>
+    <a th:href="@{'/cities'(page=${cities.number - 1},search=${search})}" th:if="${cities.hasPrevious()}">Previous</a>
+    <span th:text="${cities.number + 1}"></span>/<span th:text="${cities.totalPages}"></span>
+    <a th:href="@{'/cities'(page=${cities.number + 1},search=${search})}" th:if="${cities.hasNext()}">Next</a>
+</div>
+<br>
+<br>
+<a href="/home">Back to home</a>
+</body>
+</html>

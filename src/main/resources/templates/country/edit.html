@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit country</title>
+</head>
+<body>
+    <h1>Edit country</h1>
+    <p>
+        <a href="/countries">Country list</a>
+    </p>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/edit-country}" th:object="${country}" method="post">
+        <input th:type="hidden" name="id" th:field="*{id}">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update country"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
